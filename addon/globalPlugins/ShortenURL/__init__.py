@@ -9,7 +9,7 @@ from scriptHandler import script
 import addonHandler
 import globalVars
 import ui
-
+import api
 import sys, os
 sys.path.append(os.path.dirname(__file__))
 import validators
@@ -26,6 +26,12 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		if globalVars.appArgs.secure:
 			return
 
+		# Creation of our menu.
+		self.toolsMenu = gui.mainFrame.sysTrayIcon.toolsMenu
+		# Translators: Name of the item in the tools menu
+		self.menuItem = self.toolsMenu.Append(wx.ID_ANY, _("&AcortadorURL"))
+		gui.mainFrame.sysTrayIcon.Bind(wx.EVT_MENU, self.dlgPrincipal, self.menuItem)
+
 	def terminate(self):
 		try:
 			if not self._MainWindows:
@@ -33,16 +39,19 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		except (AttributeError, RuntimeError):
 			pass
 
+	def dlgPrincipal(self, event):
+		if not self._MainWindows:
+			self._MainWindows = Dialogo(gui.mainFrame)
+		if not self._MainWindows.IsShown():
+			gui.mainFrame.prePopup()
+			self._MainWindows.Show()
+
 	# Translators: Description for the input gesture panel
 	@script(gesture=None, description= _("Activar la ventana de AcortadorURL"),
 		# Translators: Category name in panel entry gestures
 		category= _("AcortadorURL"))
 	def script_ShortenURL(self, gesture):
-		if not self._MainWindows:
-			self.	_MainWindows = Dialogo(gui.mainFrame)
-		if not self._MainWindows.IsShown():
-			gui.mainFrame.prePopup()
-			self.	_MainWindows.Show()
+		wx.CallAfter(self.dlgPrincipal, None)
 
 class Dialogo(wx.Dialog):
 # Function taken from the add-on emoticons to center the window
@@ -84,12 +93,12 @@ class Dialogo(wx.Dialog):
 
 		# Translators: Label for the URL shortening field
 		label2 = wx.StaticText(panel_dialogo, wx.ID_ANY, label=_("&url para acortar:"))
-		self.textoOrigen = wx.TextCtrl(panel_dialogo, wx.ID_ANY,style = wx.TE_PROCESS_ENTER | wx.TE_MULTILINE | wx.HSCROLL)
+		self.textoOrigen = wx.TextCtrl(panel_dialogo, wx.ID_ANY,style = wx.TE_PROCESS_ENTER | wx.TE_MULTILINE)
 		self.Bind(wx.EVT_TEXT_ENTER, self.Txt_Ent, self.textoOrigen)
 
 		# Translators: Label for the result field with shortened url
 		label3 = wx.StaticText(panel_dialogo, wx.ID_ANY, label=_("&Dirección URL acortada:"))
-		self.textoDestino = wx.TextCtrl(panel_dialogo, wx.ID_ANY, style= wx.TE_MULTILINE | wx.TE_READONLY)
+		self.textoDestino = wx.TextCtrl(panel_dialogo, wx.ID_ANY, style= wx.TE_READONLY |wx.HSCROLL | wx.TE_MULTILINE)
 
 		# Translators: Copy to clipboard button name
 		self.CopyClipboardBTN = wx.Button(panel_dialogo, wx.ID_ANY, _("&Copiar al portapapeles"))
@@ -130,18 +139,7 @@ class Dialogo(wx.Dialog):
 		self.textoOrigen.SetFocus()
 
 	def OnChoice(self, event):
-		indice = event.GetSelection()
-
-		if indice == 0:
-			self.indice = 0
-		elif indice == 1:
-			self.indice = 1
-		elif indice == 2:
-			self.indice = 2
-		elif indice == 3:
-			self.indice = 3
-		elif indice == 4:
-			self.indice = 4
+		self.indice = event.GetSelection()
 		self.textoOrigen.Clear()
 		self.textoDestino.Clear()
 
@@ -205,11 +203,8 @@ Tiene que generar una antes para copiarla al portapapeles.""")
 				_("Error"), wx.ICON_ERROR)
 			self.textoOrigen.SetFocus()
 		else:
-			textoPortapapeles = wx.TextDataObject(str(self.textoDestino.GetValue()))
-			if wx.TheClipboard.Open():
-				wx.TheClipboard.SetData(textoPortapapeles)
-				wx.TheClipboard.Close()
-				ui.message(_("Se a copiado la URL {} al portapapeles. Ya puede compartirla."))
+			api.copyToClip(self.textoDestino.GetValue())
+			ui.message(_("Se a copiado la URL al portapapeles. Ya puede compartirla."))
 
 	def onHelp(self, event):
 		# Translators: General add-on help

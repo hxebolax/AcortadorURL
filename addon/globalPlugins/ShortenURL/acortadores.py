@@ -1,69 +1,63 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Copyright (C) 2020 Héctor J. Benítez Corredera <xebolax@gmail.com>
+# This file is covered by the GNU General Public License.
 
-import requests
-import urllib.request, urllib.parse, urllib.error
+import urllib.request, urllib.parse
 import json
 
-class AcortameShortener ():
+class AcortameShortener :
 	def __init__(self, *args, **kwargs):
 		self.name = "acorta.me"
-		super(AcortameShortener, self).__init__(*args, **kwargs)
 
 	def _shorten (self, url):
-		answer = url
-		api = requests.get ("https://acorta.me/api.php?action=shorturl&format=simple&url=" + urllib.parse.quote(url))
-		if api.status_code == 200:
-			answer = api.text
-		return answer
+		api = urllib.request.urlopen("https://acorta.me/api.php?action=shorturl&format=simple&url=" + urllib.parse.quote(url))
+		if api.code == 200:
+			text = api.read().decode('utf-8')
+			return text
 
-class ClckruShortener ():
+class ClckruShortener :
 	def __init__ (self, *args, **kwargs):
 		self.name = "clck.ru"
-		super(ClckruShortener, self).__init__(*args, **kwargs)
 
 	def _shorten (self, url):
-		answer = url
-		api = requests.get ("http://clck.ru/--?url=" + urllib.parse.quote(url))
-		if api.status_code == 200:
-			answer = api.text
-		return answer
+		api = urllib.request.urlopen("http://clck.ru/--?url=" + urllib.parse.quote(url))
+		if api.code == 200:
+			text = api.read().decode('utf-8')
+			return text
 
-class IsgdShortener ():
+class IsgdShortener :
 	def __init__ (self, *args, **kwargs):
 		self.name = "Is.gd"
-		super(IsgdShortener, self).__init__(*args, **kwargs)
 
 	def _shorten (self, url):
-		answer = url
-		api = requests.get ("http://is.gd/api.php?longurl=" + urllib.parse.quote(url))
-		if api.status_code == 200:
-			answer = api.text
-		return answer
+		opener = urllib.request.build_opener()
+		opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+		api = opener.open("http://is.gd/api.php?longurl=" + urllib.parse.quote(url))
+		if api.code == 200:
+			text = api.read().decode('utf-8')
+			return text
 
-class RelinkShortener():
+class RelinkShortener:
 	def __init__(self, *args, **kwargs):
 		self.name = "rel.ink"
-		super(RelinkShortener, self).__init__(*args, **kwargs)
 
 	def _shorten(self, url):
-		response = requests.post('https://rel.ink/api/links/', data={"url": url})
-		if response.status_code == 201:
-			data = json.dumps(response.json())
-			output = json.loads(data)
-			output = 'https://rel.ink/' + str(output['hashid'])
-		else:
-			return response.status_code
-		return output
+		data = urllib.parse.urlencode({"url": url}).encode()
+		response = urllib.request.Request("https://rel.ink/api/links/", data=data)
+		opener = urllib.request.build_opener()
+		opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+		resp = opener.open(response)
+		if resp.code == 201:
+			text = json.loads(resp.read().decode('utf-8'))
+			return "https://rel.ink/" + text["hashid"]
 
-class TinyurlShortener ():
+class TinyurlShortener :
 	def __init__(self, *args, **kwargs):
 		self.name = "TinyURL.com"
-		super(TinyurlShortener, self).__init__(*args, **kwargs)
 
 	def _shorten (self, url):
-		answer = url
-		api = requests.get ("http://tinyurl.com/api-create.php?url=" + urllib.parse.quote(url))
-		if api.status_code == 200:
-			answer = api.text
-		return answer
+		api = urllib.request.urlopen("http://tinyurl.com/api-create.php?url=" + urllib.parse.quote(url))
+		if api.code == 200:
+			text = api.read().decode('utf-8')
+			return text
+

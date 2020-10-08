@@ -36,4 +36,4 @@ Salir, cerraremos la aplicación.
 
 * Alt+a: Esta ayuda.
 
-* Alt+F4 o Escape: Saldrá de la aplicación.""")
+* Alt+F4 o Escape: Saldrá de la aplicación.
