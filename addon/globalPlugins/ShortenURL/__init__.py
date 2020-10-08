@@ -96,6 +96,10 @@ class Dialogo(wx.Dialog):
 		self.textoOrigen = wx.TextCtrl(panel_dialogo, wx.ID_ANY,style = wx.TE_PROCESS_ENTER | wx.TE_MULTILINE)
 		self.Bind(wx.EVT_TEXT_ENTER, self.Txt_Ent, self.textoOrigen)
 
+		# Translators: shorten url button name
+		self.AcortaBTN = wx.Button(panel_dialogo, wx.ID_ANY, _("&Acortar URL"))
+		self.Bind(wx.EVT_BUTTON, self.Txt_Ent, self.AcortaBTN)
+
 		# Translators: Label for the result field with shortened url
 		label3 = wx.StaticText(panel_dialogo, wx.ID_ANY, label=_("&Dirección URL acortada:"))
 		self.textoDestino = wx.TextCtrl(panel_dialogo, wx.ID_ANY, style= wx.TE_READONLY |wx.HSCROLL | wx.TE_MULTILINE)
@@ -103,10 +107,6 @@ class Dialogo(wx.Dialog):
 		# Translators: Copy to clipboard button name
 		self.CopyClipboardBTN = wx.Button(panel_dialogo, wx.ID_ANY, _("&Copiar al portapapeles"))
 		self.Bind(wx.EVT_BUTTON, self.onCopyClipboard, self.CopyClipboardBTN)
-
-		# Translators: Help button name
-		self.HelpBTN = wx.Button(panel_dialogo, wx.ID_ANY, _("&Ayuda"))
-		self.Bind(wx.EVT_BUTTON, self.onHelp, self.HelpBTN)
 
 		# Translators: Exit button name
 		self.ExitBTN = wx.Button(panel_dialogo, wx.ID_CANCEL, _("Salir Alt+F4"))
@@ -122,13 +122,13 @@ class Dialogo(wx.Dialog):
 		sizerV.Add(self.choice, 0, wx.EXPAND | wx.ALL)
 
 		sizerV.Add(label2, 0, wx.EXPAND | wx.ALL)
-		sizerV.Add(self.textoOrigen, 1, wx.EXPAND | wx.ALL)
+		sizerV.Add(self.textoOrigen, 0, wx.EXPAND | wx.ALL)
+		sizerV.Add(self.AcortaBTN, 0, wx.EXPAND)
 
 		sizerV.Add(label3, 0, wx.EXPAND | wx.ALL)
 		sizerV.Add(self.textoDestino, 0, wx.EXPAND | wx.ALL)
 
 		sizerH.Add(self.CopyClipboardBTN, 2, wx.CENTER)
-		sizerH.Add(self.HelpBTN, 2, wx.CENTER)
 		sizerH.Add(self.ExitBTN, 2, wx.CENTER)
 
 		sizerV.Add(sizerH, 0, wx.CENTER)
@@ -205,42 +205,6 @@ Tiene que generar una antes para copiarla al portapapeles.""")
 		else:
 			api.copyToClip(self.textoDestino.GetValue())
 			ui.message(_("Se a copiado la URL al portapapeles. Ya puede compartirla."))
-
-	def onHelp(self, event):
-		# Translators: General add-on help
-		msg = \
-_("""Este complemento es sencillo.
-
-Consta de un cuadro combinado donde elegiremos el servicio que deseemos para acortar la URL.
-
-Luego tenemos un cuadro de texto donde escribiremos o pegaremos la dirección a acortar y pulsando intro nos dejara en un cuadro de lectura con el resultado.
-
-En el cuadro de lectura podremos seleccionar la URL resultante para compartirla.
-
-Luego disponemos de 3 botones:
-
-Copiar al portapapeles, este botón sirve para copiar el portapapeles la URL que se generó.
-
-Ayuda, esta documentación.
-
-Salir, cerraremos la aplicación.
-
-Teclas rápidas:
-
-Alt+s: Nos llevara al selector de servicios.
-
-Alt+u: Nos dejara el cursor en el cuadro para escribir la URL que queremos convertir.
-
-Alt+d: Nos dejara en el cuadro de lectura donde tendremos el resultado de la URL ya acortada.
-
-Alt+c: Copiara la URL acortada al portapapeles.
-
-Alt+a: Esta ayuda.
-
-Alt+F4 o Escape: Saldrá de la aplicación.""")
-		gui.messageBox(msg,
-			# Translators: Message window title: help
-			_("Ayuda"), wx.ICON_INFORMATION)
 
 	def onExit(self, event):
 		self.Destroy()
