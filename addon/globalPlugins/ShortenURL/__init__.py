@@ -86,7 +86,7 @@ class Dialogo(wx.Dialog):
 
 		# Translators: Label for the service combo box
 		label1 = wx.StaticText(panel_dialogo, wx.ID_ANY, label=_("&Servicios acortadores disponibles:"))
-		acortadores = ["Acortame", "Clckru", "Isgd", "Relink", "Tinyurl"]
+		acortadores = ["Acortame", "Clckru", "Isgd", "Tinyurl"] # "Relink"
 		self.choice = wx.Choice(panel_dialogo, wx.ID_ANY, choices = acortadores) 
 		self.choice.SetSelection(0)
 		self.choice.Bind(wx.EVT_CHOICE, self.OnChoice)
@@ -151,9 +151,9 @@ class Dialogo(wx.Dialog):
 			acortador = acortadores.ClckruShortener()
 		elif self.indice == 2:
 			acortador = acortadores.IsgdShortener()
+#		elif self.indice == 3:
+#			acortador = acortadores.RelinkShortener()
 		elif self.indice == 3:
-			acortador = acortadores.RelinkShortener()
-		elif self.indice == 4:
 			acortador = acortadores.TinyurlShortener()
 
 		if self.textoOrigen.GetValue() == "":

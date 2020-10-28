@@ -37,19 +37,19 @@ class IsgdShortener :
 			text = api.read().decode('utf-8')
 			return text
 
-class RelinkShortener:
-	def __init__(self, *args, **kwargs):
-		self.name = "rel.ink"
+#class RelinkShortener:
+#	def __init__(self, *args, **kwargs):
+#		self.name = "rel.ink"
 
-	def _shorten(self, url):
-		data = urllib.parse.urlencode({"url": url}).encode()
-		response = urllib.request.Request("https://rel.ink/api/links/", data=data)
-		opener = urllib.request.build_opener()
-		opener.addheaders = [('User-agent', 'Mozilla/5.0')]
-		resp = opener.open(response)
-		if resp.code == 201:
-			text = json.loads(resp.read().decode('utf-8'))
-			return "https://rel.ink/" + text["hashid"]
+#	def _shorten(self, url):
+#		data = urllib.parse.urlencode({"url": url}).encode()
+#		response = urllib.request.Request("https://rel.ink/api/links/", data=data)
+#		opener = urllib.request.build_opener()
+#		opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+#		resp = opener.open(response)
+#		if resp.code == 201:
+#			text = json.loads(resp.read().decode('utf-8'))
+#			return "https://rel.ink/" + text["hashid"]
 
 class TinyurlShortener :
 	def __init__(self, *args, **kwargs):
