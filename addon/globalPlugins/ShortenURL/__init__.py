@@ -10,9 +10,9 @@ import addonHandler
 import globalVars
 import ui
 import api
+import re
 import sys, os
 sys.path.append(os.path.dirname(__file__))
-import validators
 import acortadores
 
 addonHandler.initTranslation()
@@ -67,10 +67,14 @@ class Dialogo(wx.Dialog):
 		return (x, y)
 
 	def validaUrl(self, url):
-		if not validators.url(url):
-			return False
-		else:
-			return True
+		regex = re.compile(
+			r'^(?:http|ftp)s?://' # http:// or https://
+			r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|' #domain...
+			r'localhost|' #localhost...
+			r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
+			r'(?::\d+)?' # optional port
+			r'(?:/?|[/?]\S+)$', re.IGNORECASE)
+		return  re.match(regex,url) is not None
 
 	def __init__(self, parent):
 		WIDTH = 500
