@@ -1,4 +1,4 @@
-# Manual AcortadorURL
+# AcortadorURL
 Este complemento es sencillo.
 
 Podremos acortar URL de manera fácil.
