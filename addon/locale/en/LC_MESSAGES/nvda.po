@@ -1,29 +1,28 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: URL shortening\n"
-"POT-Creation-Date: 2021-11-14 17:28+0400\n"
-"PO-Revision-Date: 2021-12-28 16:36+0400\n"
+"Project-Id-Version: URL Shortener\n"
+"POT-Creation-Date: 2021-12-31 11:24+0400\n"
+"PO-Revision-Date: 2021-12-31 11:32+0400\n"
 "Last-Translator: Dragan Ratkovich\n"
-"Language-Team: Dragan Ratkovich\n"
+"Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
-"X-Poedit-SearchPath-0: .\n"
 
 #: __init__.py:32
 msgid "&AcortadorURL"
-msgstr "&URL shortener"
+msgstr "&URLShortener"
 
 #: __init__.py:50
 msgid "Activar la ventana de AcortadorURL"
 msgstr "Activate the URL Shortener window"
 
-#: __init__.py:52 __init__.py:85
+#: __init__.py:52 __init__.py:85 buildVars.py:22
 msgid "AcortadorURL"
-msgstr "URL shortener"
+msgstr "URLShortener"
 
 #: __init__.py:92
 msgid "&Servicios acortadores disponibles:"
@@ -39,7 +38,7 @@ msgstr "&Shorten URL"
 
 #: __init__.py:108
 msgid "&Dirección URL acortada:"
-msgstr "Shortened &URL"
+msgstr "Shortened &URL:"
 
 #: __init__.py:112
 msgid "&Copiar al portapapeles"
@@ -77,7 +76,7 @@ msgid ""
 msgstr ""
 "The shortened url could not be generated.\n"
 "Failed to connect to the service.\n"
-"Please try again and if the problem persists, please select a different shortening service."
+"Please try again and if the problem persists, select a different shortening service."
 
 #: __init__.py:203
 msgid ""
@@ -90,3 +89,7 @@ msgstr ""
 #: __init__.py:211
 msgid "Se a copiado la URL al portapapeles. Ya puede compartirla."
 msgstr "The url has been copied to the clipboard. Now you can share it."
+
+#: buildVars.py:25
+msgid "Acorta URLs facilmente."
+msgstr "Shorten URLs easily."
