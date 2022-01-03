@@ -1,4 +1,13 @@
 # AcortadorURL
+*** This add-on is discontinued, it will not receive new versions ***.
+
+The code is given to the community for those who wish to continue it.
+
+*** Este complemento queda descontinuado, no recibirá nuevas versiones ***
+
+Queda el código cedido a la comunidad para quien desee continuarlo.
+
+
 Este complemento es sencillo.
 
 Podremos acortar URL de manera fácil.

@@ -1,0 +1,95 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: URL Kısaltıcı 0.4.1\n"
+"POT-Creation-Date: 2021-12-20 17:14+0300\n"
+"PO-Revision-Date: 2021-12-20 18:44+0300\n"
+"Last-Translator: Umut KORKMAZ <umutkork@gmail.com>\n"
+"Language-Team: Umut KORKMAZ <Umutkork@gmail.com>\n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: nvda/userConfig/addons/AcortadorURL/globalPlugins\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: ShortenURL/__init__.py:32
+msgid "&AcortadorURL"
+msgstr "&URL Kısaltıcı"
+
+#: ShortenURL/__init__.py:50
+msgid "Activar la ventana de AcortadorURL"
+msgstr "URL Kısaltıcı penceresini etkinleştir"
+
+#: ShortenURL/__init__.py:52 ShortenURL/__init__.py:85
+msgid "AcortadorURL"
+msgstr "URL Kısaltıcı"
+
+#: ShortenURL/__init__.py:92
+msgid "&Servicios acortadores disponibles:"
+msgstr "Mevcut Kısaltma &Servisleri"
+
+#: ShortenURL/__init__.py:99
+msgid "&url para acortar:"
+msgstr "Kısaltılacak &url:"
+
+#: ShortenURL/__init__.py:104
+msgid "&Acortar URL"
+msgstr "URL'yi kıs&alt"
+
+#: ShortenURL/__init__.py:108
+msgid "&Dirección URL acortada:"
+msgstr "&Kısaltılmış URL:"
+
+#: ShortenURL/__init__.py:112
+msgid "&Copiar al portapapeles"
+msgstr "&Panoya kopyala"
+
+#: ShortenURL/__init__.py:116
+msgid "Salir Alt+F4"
+msgstr "Çık Alt+F4"
+
+#: ShortenURL/__init__.py:166
+msgid ""
+"No puedes dejar el campo de la url en blanco para acortar.\n"
+"Asegúrate de introducir una URL correcta."
+msgstr ""
+"Kısaltmak için url alanını boş bırakamazsınız.\n"
+"Doğru bir URL girdiğinizden emin olun."
+
+#: ShortenURL/__init__.py:170 ShortenURL/__init__.py:180
+#: ShortenURL/__init__.py:196 ShortenURL/__init__.py:207
+msgid "Error"
+msgstr "Hata"
+
+#: ShortenURL/__init__.py:176
+msgid ""
+"La URL que a introducido no es correcta.\n"
+"Asegúrese de introducir una URL valida."
+msgstr ""
+"Girdiğiniz URL doğru değil.\n"
+"Geçerli bir URL girdiğinizden emin olun."
+
+#: ShortenURL/__init__.py:191
+msgid ""
+"No se pudo generar la URL acortada.\n"
+"La conexión con el servicio fallo.\n"
+"Inténtelo de nuevo y si el problema persiste elija otro servicio acortador."
+msgstr ""
+"Kısaltılmış url oluşturulamadı.\n"
+"Seçili Servis ile bağlantı kurulamadı.\n"
+"Lütfen tekrar deneyin ve sorun devam ederse başka bir kısaltıcı servis seçin."
+
+#: ShortenURL/__init__.py:203
+msgid ""
+"No hay ninguna URL acortada.\n"
+"Tiene que generar una antes para copiarla al portapapeles."
+msgstr ""
+"Kısaltılmış url yok.\n"
+"Panoya kopyalamak için önce bir tane oluşturmalısınız."
+
+#: ShortenURL/__init__.py:211
+msgid "Se a copiado la URL al portapapeles. Ya puede compartirla."
+msgstr "URL panoya kopyalandı. Artık paylaşabilirsiniz."
